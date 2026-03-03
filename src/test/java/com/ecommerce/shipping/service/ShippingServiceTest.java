@@ -70,7 +70,7 @@ class ShippingServiceTest {
 
         double charge = shippingService.calculateShippingCharge(1L, 1L, "standard", 2.0);
 
-        assertEquals(76.71, charge, 0.5); // Allow slight delta
+        assertEquals(76.71, charge, 0.01);
     }
 
     @Test
@@ -89,6 +89,6 @@ class ShippingServiceTest {
 
         double charge = shippingService.calculateShippingCharge(1L, 1L, "express", 5.0);
 
-        assertEquals(7739.78, charge, 0.5); // Allow slight delta due to exact haversine
+        assertEquals(7739.78, charge, 0.01);
     }
 }
