@@ -1,0 +1,114 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.ecommerce:shipping-calculator >------------------
+[INFO] Building shipping-calculator 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ shipping-calculator ---
+[INFO] Deleting C:\Users\91959\OneDrive\Desktop\jumbotail\shipping-calculator\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ shipping-calculator ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ shipping-calculator ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 28 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ shipping-calculator ---
+[INFO] skip non existing resourceDirectory C:\Users\91959\OneDrive\Desktop\jumbotail\shipping-calculator\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ shipping-calculator ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ shipping-calculator ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.ecommerce.shipping.service.ShippingServiceTest
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 10.04 s <<< FAILURE! -- in com.ecommerce.shipping.service.ShippingServiceTest
+[ERROR] com.ecommerce.shipping.service.ShippingServiceTest.testCalculateShippingCharge_ExpressSpeed_Aeroplane -- Time elapsed: 9.772 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <7486.0> but was: <7739.787805148049>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:201)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:88)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:83)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1052)
+	at com.ecommerce.shipping.service.ShippingServiceTest.testCalculateShippingCharge_ExpressSpeed_Aeroplane(ShippingServiceTest.java:95)
+
+[INFO] Running com.ecommerce.shipping.ShippingCalculatorApplicationTests
+01:43:28.902 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.ecommerce.shipping.ShippingCalculatorApplicationTests]: ShippingCalculatorApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:43:29.572 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.ecommerce.shipping.ShippingCalculatorApplication for test class com.ecommerce.shipping.ShippingCalculatorApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.3)
+
+2026-03-03T01:43:33.264+05:30  INFO 11248 --- [           main] c.e.s.ShippingCalculatorApplicationTests : Starting ShippingCalculatorApplicationTests using Java 17.0.16 with PID 11248 (started by 91959 in C:\Users\91959\OneDrive\Desktop\jumbotail\shipping-calculator)
+2026-03-03T01:43:33.271+05:30  INFO 11248 --- [           main] c.e.s.ShippingCalculatorApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2026-03-03T01:43:38.005+05:30  INFO 11248 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-03T01:43:38.384+05:30  INFO 11248 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 314 ms. Found 4 JPA repository interfaces.
+2026-03-03T01:43:41.221+05:30  INFO 11248 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-03T01:43:41.677+05:30  INFO 11248 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-03T01:43:44.018+05:30  INFO 11248 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-03T01:43:44.204+05:30  INFO 11248 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-03T01:43:45.252+05:30  INFO 11248 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-03-03T01:43:45.293+05:30  INFO 11248 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-03T01:43:45.595+05:30  WARN 11248 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-03T01:43:46.041+05:30  INFO 11248 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-03T01:43:49.858+05:30  INFO 11248 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-03T01:43:50.250+05:30  INFO 11248 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-03T01:43:51.875+05:30  INFO 11248 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-03T01:43:58.023+05:30  WARN 11248 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-03T01:44:03.168+05:30  INFO 11248 --- [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-03-03T01:44:04.646+05:30  INFO 11248 --- [           main] c.e.s.ShippingCalculatorApplicationTests : Started ShippingCalculatorApplicationTests in 33.12 seconds (process running for 52.158)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 37.33 s -- in com.ecommerce.shipping.ShippingCalculatorApplicationTests
+[INFO] Running com.ecommerce.shipping.util.DistanceCalculatorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.274 s -- in com.ecommerce.shipping.util.DistanceCalculatorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   ShippingServiceTest.testCalculateShippingCharge_ExpressSpeed_Aeroplane:95 expected: <7486.0> but was: <7739.787805148049>
+[INFO] 
+[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:21 min
+[INFO] Finished at: 2026-03-03T01:44:05+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.4:test (default-test) on project shipping-calculator: There are test failures.
+[ERROR] 
+[ERROR] See C:\Users\91959\OneDrive\Desktop\jumbotail\shipping-calculator\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
