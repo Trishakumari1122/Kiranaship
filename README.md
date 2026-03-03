@@ -40,7 +40,7 @@ I tried to keep the code clean, modular, and easy to extend. Here are a few key 
    I added a `GlobalExceptionHandler` using `@ControllerAdvice`. If an API receives bad input (like a missing seller ID or an invalid product), it returns a clean, structured JSON error response instead of throwing an ugly stack trace.
 
 5. **Caching:** 
-   Finding the nearest warehouse across the entire country could get expensive as the platform grows. I added Spring's `@Cacheable` to the warehouse lookup service so repeated requests for the same seller's location return instantly.
+   Finding the nearest warehouse across the entire country could get expensive as the platform grows. To reduce Haversine computation overhead for frequent lookups, I added Spring's `@Cacheable` to the warehouse lookup service. I also utilized a **Custom Cache Key**, ensuring that if a new warehouse is added nearby, the cache clears and a fresh geographic query is correctly run!
 
 ## API Endpoints
 
@@ -67,12 +67,4 @@ Combines the previous two steps into one seamless API call.
   "weight": 5.0
 }
 ```
-
-## Exploring the Database
-Want to see the raw data? 
-When the app is running, go to `http://localhost:8080/h2-console`
-* **JDBC URL:** `jdbc:h2:mem:testdb`
-* **User Name:** `sa`
-* **Password:** `password`
-
 Thanks again for the opportunity to work on this, it was a fun challenge! Let me know if you have any questions about the implementation.
