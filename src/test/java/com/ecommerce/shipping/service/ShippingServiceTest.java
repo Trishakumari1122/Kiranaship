@@ -38,7 +38,8 @@ class ShippingServiceTest {
         List<TransportModeStrategy> transportModeStrategies = Arrays.asList(
                 new MiniVanTransportStrategy(),
                 new TruckTransportStrategy(),
-                new AeroplaneTransportStrategy());
+                new AeroplaneTransportStrategy(),
+                new HeavyTruckTransportStrategy());
 
         List<DeliverySpeedStrategy> deliverySpeedStrategies = Arrays.asList(
                 new StandardDeliverySpeedStrategy(),
