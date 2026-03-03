@@ -23,9 +23,11 @@ public class ShippingController {
             @RequestParam("warehouseId") Long warehouseId,
             @RequestParam("customerId") Long customerId,
             @RequestParam("deliverySpeed") String deliverySpeed,
-            @RequestParam(value = "weight", required = false) Double weight) {
+            @RequestParam(value = "weight", required = false) Double weight,
+            @RequestParam(value = "productId", required = false) Long productId) {
 
-        double charge = shippingService.calculateShippingCharge(warehouseId, customerId, deliverySpeed, weight);
+        double charge = shippingService.calculateShippingCharge(warehouseId, customerId, deliverySpeed, weight,
+                productId);
         return ResponseEntity.ok(new ShippingChargeResponse(charge));
     }
 

@@ -12,13 +12,13 @@ INSERT INTO seller (id, name, lat, lng) VALUES (123, 'Test Seller 123', 13.000, 
 
 -- Products
 -- Maggie 500g: 0.5kg, 10x10x10. Price: 10
-INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, seller_id) VALUES (1, 'Maggie 500g Packet', 10.0, 0.5, 10, 10, 10, 1);
+INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, is_bulk_item, is_fragile, seller_id) VALUES (1, 'Maggie 500g Packet', 10.0, 0.5, 10, 10, 10, false, true, 1);
 -- Rice Bag 10Kg
-INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, seller_id) VALUES (2, 'Rice Bag 10Kg', 500.0, 10.0, 1000, 800, 500, 2);
+INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, is_bulk_item, is_fragile, seller_id) VALUES (2, 'Rice Bag 10Kg', 500.0, 10.0, 1000, 800, 500, true, false, 2);
 -- Sugar Bag 25kg: 25kg, 1000x900x600
-INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, seller_id) VALUES (3, 'Sugar Bag 25kg', 700.0, 25.0, 1000, 900, 600, 3);
+INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, is_bulk_item, is_fragile, seller_id) VALUES (3, 'Sugar Bag 25kg', 700.0, 25.0, 1000, 900, 600, true, false, 3);
 -- Test Product 456
-INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, seller_id) VALUES (456, 'Test Product 456', 100.0, 1.0, 10, 10, 10, 123);
+INSERT INTO product (id, name, price, weight_in_kg, length_cm, width_cm, height_cm, is_bulk_item, is_fragile, seller_id) VALUES (456, 'Test Product 456', 100.0, 1.0, 10, 10, 10, false, false, 123);
 
 -- Warehouses
 INSERT INTO warehouse (id, name, lat, lng) VALUES (1, 'BLR_Warehouse', 12.99999, 37.923273);

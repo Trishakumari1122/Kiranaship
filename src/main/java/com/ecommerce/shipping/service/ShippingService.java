@@ -55,7 +55,7 @@ public class ShippingService {
         }
 
         public double calculateShippingCharge(Long warehouseId, Long customerId, String deliverySpeed,
-                        Double weightKg) {
+                        Double weightKg, Long productId) {
                 Warehouse warehouse = warehouseRepository.findById(warehouseId)
                                 .orElseThrow(() -> new IllegalArgumentException(
                                                 "Warehouse not found with ID: " + warehouseId));
@@ -67,6 +67,16 @@ public class ShippingService {
                 double distance = distanceCalculator.calculateDistance(warehouse.getLocation(), customer.getLocation());
 
                 String modeName = determineTransportMode(distance);
+
+                if (actualWeight >= 50.0) {
+                        modeName = "HEAVYTRUCK";
+                } else if (productId != null) {
+                        com.ecommerce.shipping.model.Product product = productRepository.findById(productId)
+                                        .orElse(null);
+                        if (product != null && product.isBulkItem()) {
+                                modeName = "HEAVYTRUCK";
+                        }
+                }
                 TransportModeStrategy transportStrategy = transportModeStrategies.get(modeName);
                 if (transportStrategy == null) {
                         throw new IllegalStateException("No applicable transport mode found for distance: " + distance);
@@ -88,7 +98,7 @@ public class ShippingService {
                                 .getNearestWarehouseBySeller(request.getSellerId());
 
                 double charge = calculateShippingCharge(nearestWarehouse.getWarehouseId(), request.getCustomerId(),
-                                request.getDeliverySpeed(), request.getWeight());
+                                request.getDeliverySpeed(), request.getWeight(), request.getProductId());
 
                 return new CombinedShippingChargeResponse(charge, nearestWarehouse);
         }

@@ -68,7 +68,7 @@ class ShippingServiceTest {
         // Speed (Standard) = 10
         // Total = ~ 76.714
 
-        double charge = shippingService.calculateShippingCharge(1L, 1L, "standard", 2.0);
+        double charge = shippingService.calculateShippingCharge(1L, 1L, "standard", 2.0, null);
 
         assertEquals(76.71, charge, 0.01);
     }
@@ -87,8 +87,26 @@ class ShippingServiceTest {
         // Speed (Express) = 10 + (1.2 * 5) = 16
         // Total = 7486
 
-        double charge = shippingService.calculateShippingCharge(1L, 1L, "express", 5.0);
+        double charge = shippingService.calculateShippingCharge(1L, 1L, "express", 5.0, null);
 
         assertEquals(7739.78, charge, 0.01);
+    }
+
+    @Test
+    void testCalculateShippingCharge_HeavyTruck_BulkItem() {
+        Warehouse warehouse = new Warehouse("W1", new Location(10.0, 10.0));
+        Customer customer = new Customer("C1", "123", new Location(10.1, 10.0)); // ~11km distance
+
+        when(warehouseRepository.findById(1L)).thenReturn(Optional.of(warehouse));
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+
+        // Weight = 60kg (Triggers heavy truck >= 50kg)
+        // Distance ~ 11.119 km
+        // Heavy Truck Transport = (0.8 * 11.119 * 60) + 500 = 533.71 + 500 = 1033.71
+        // Speed (Standard) = 10
+        // Total = ~1043.71
+
+        double charge = shippingService.calculateShippingCharge(1L, 1L, "standard", 60.0, null);
+        assertEquals(1043.71, charge, 0.5);
     }
 }
