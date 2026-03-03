@@ -14,4 +14,9 @@ public class MiniVanTransportStrategy implements TransportModeStrategy {
     public double calculateTransportCharge(double distanceKm, double weightKg) {
         return 3.0 * distanceKm * weightKg;
     }
+
+    @Override
+    public String getModeName() {
+        return "MINIVAN";
+    }
 }

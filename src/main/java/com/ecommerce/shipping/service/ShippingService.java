@@ -14,6 +14,7 @@ import com.ecommerce.shipping.util.DistanceCalculator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShippingService {
@@ -23,8 +24,8 @@ public class ShippingService {
         private final ProductRepository productRepository;
         private final WarehouseService warehouseService;
         private final DistanceCalculator distanceCalculator;
-        private final List<TransportModeStrategy> transportModeStrategies;
-        private final List<DeliverySpeedStrategy> deliverySpeedStrategies;
+        private final Map<String, TransportModeStrategy> transportModeStrategies;
+        private final Map<String, DeliverySpeedStrategy> deliverySpeedStrategies;
 
         public ShippingService(WarehouseRepository warehouseRepository,
                         CustomerRepository customerRepository,
@@ -38,8 +39,19 @@ public class ShippingService {
                 this.productRepository = productRepository;
                 this.warehouseService = warehouseService;
                 this.distanceCalculator = distanceCalculator;
-                this.transportModeStrategies = transportModeStrategies;
-                this.deliverySpeedStrategies = deliverySpeedStrategies;
+                this.transportModeStrategies = transportModeStrategies.stream()
+                                .collect(java.util.stream.Collectors.toMap(s -> s.getModeName().toUpperCase(), s -> s));
+                this.deliverySpeedStrategies = deliverySpeedStrategies.stream()
+                                .collect(java.util.stream.Collectors.toMap(s -> s.getSpeedName().toUpperCase(),
+                                                s -> s));
+        }
+
+        private String determineTransportMode(double distanceKm) {
+                if (distanceKm <= 100)
+                        return "MINIVAN";
+                if (distanceKm <= 500)
+                        return "TRUCK";
+                return "AEROPLANE";
         }
 
         public double calculateShippingCharge(Long warehouseId, Long customerId, String deliverySpeed,
@@ -54,17 +66,16 @@ public class ShippingService {
                 double actualWeight = weightKg != null ? weightKg : 1.0; // Default to 1.0kg if not specified
                 double distance = distanceCalculator.calculateDistance(warehouse.getLocation(), customer.getLocation());
 
-                TransportModeStrategy transportStrategy = transportModeStrategies.stream()
-                                .filter(s -> s.isApplicable(distance))
-                                .findFirst()
-                                .orElseThrow(() -> new IllegalStateException(
-                                                "No applicable transport mode found for distance: " + distance));
+                String modeName = determineTransportMode(distance);
+                TransportModeStrategy transportStrategy = transportModeStrategies.get(modeName);
+                if (transportStrategy == null) {
+                        throw new IllegalStateException("No applicable transport mode found for distance: " + distance);
+                }
 
-                DeliverySpeedStrategy speedStrategy = deliverySpeedStrategies.stream()
-                                .filter(s -> s.isApplicable(deliverySpeed))
-                                .findFirst()
-                                .orElseThrow(() -> new IllegalArgumentException(
-                                                "Invalid or unsupported delivery speed: " + deliverySpeed));
+                DeliverySpeedStrategy speedStrategy = deliverySpeedStrategies.get(deliverySpeed.toUpperCase());
+                if (speedStrategy == null) {
+                        throw new IllegalArgumentException("Invalid or unsupported delivery speed: " + deliverySpeed);
+                }
 
                 double transportCharge = transportStrategy.calculateTransportCharge(distance, actualWeight);
                 double speedCharge = speedStrategy.calculateSpeedCharge(actualWeight);

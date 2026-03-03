@@ -14,4 +14,9 @@ public class TruckTransportStrategy implements TransportModeStrategy {
     public double calculateTransportCharge(double distanceKm, double weightKg) {
         return 2.0 * distanceKm * weightKg;
     }
+
+    @Override
+    public String getModeName() {
+        return "TRUCK";
+    }
 }

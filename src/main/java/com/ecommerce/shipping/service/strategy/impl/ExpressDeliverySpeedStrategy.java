@@ -15,4 +15,9 @@ public class ExpressDeliverySpeedStrategy implements DeliverySpeedStrategy {
         // Rs 10 standard + Rs 1.2 per kg extra
         return 10.0 + (1.2 * weightKg);
     }
+
+    @Override
+    public String getSpeedName() {
+        return "EXPRESS";
+    }
 }

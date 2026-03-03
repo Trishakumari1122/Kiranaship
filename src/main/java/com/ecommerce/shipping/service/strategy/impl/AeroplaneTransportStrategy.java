@@ -14,4 +14,9 @@ public class AeroplaneTransportStrategy implements TransportModeStrategy {
     public double calculateTransportCharge(double distanceKm, double weightKg) {
         return 1.0 * distanceKm * weightKg;
     }
+
+    @Override
+    public String getModeName() {
+        return "AEROPLANE";
+    }
 }
